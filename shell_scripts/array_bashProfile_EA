@@ -1,0 +1,10 @@
+#!/bin/bash
+IFS=':' read -r -a path <<< "$PATH"
+binary="jamf"
+for i in ${path[*]};do
+	if [[ -e $i/"$binary" ]];then
+		echo "<result>Found</result>"
+		exit
+	fi
+done
+echo "<result>Not Found</result>"

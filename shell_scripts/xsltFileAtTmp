@@ -1,0 +1,31 @@
+#!/bin/bash
+
+jssURL=https://url:8443
+jssUser=user
+jssPass=password
+#######################################
+# Create an XSLT file at /tmp/stylesheet.xslt
+#######################################
+cat << EOF > /tmp/stylesheet.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="text"/>
+<xsl:template match="/"> 
+	<xsl:for-each select="policies/policy"> 
+		<xsl:value-of select="id"/> 
+		<xsl:text>,</xsl:text> 
+		<xsl:value-of select="name"/> 
+		<xsl:text>&#xa;</xsl:text> 
+	</xsl:for-each> 
+</xsl:template> 
+</xsl:stylesheet>
+EOF
+#######################################
+# Request a list of computers from the Jamf Pro API
+# Pass the XML data to xsltproc applying the stylesheet
+#######################################
+curl -ksu $jssUser:$jssPass ${jssURL}/JSSResource/policies | xsltproc /tmp/stylesheet.xslt - 
+for policies in $(curl -ksu $jssUser:$jssPass ${jssURL}/JSSResource/policies | xsltproc /tmp/stylesheet.xslt -);do
+	
+	echo "$policies"
+done

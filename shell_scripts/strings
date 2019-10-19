@@ -1,0 +1,3 @@
+which asr | xargs strings
+
+asr -help

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Variables
+apiUser="apiUser" # JSS user account that has read and write access to the API
+apiPass="apiPass" # Pass for the above JSS user account
+url="url" # JSS URL including the port ex. https://jamit.q.jamfsw.corp:8443
+
+GetIP=$(curl -sku $apiUser:$apiPass $/JSSResource/advancedmobiledevicesearches/id/11 | xmllint --xpath "/advanced_mobile_device_search/mobile_devices/mobile_device/IP_Address" - | sed 's/<[^>]*>/ /g' )
+GetName=$(curl -sku $apiUser:$apiPass $url/JSSResource/advancedmobiledevicesearches/id/11 | xmllint --xpath "/advanced_mobile_device_search/mobile_devices/mobile_device/name" - | sed 's/<[^>]*>/ /g' )
+# File paths - Please do not modify
+csvFile="/tmp/Device_IP_Address.csv" # CSV file used as our counter and computer name variable for our CURL loop
+
+
+
+IFS="," read -r -a array <<< " $GetIP". 
+echo ${array[0]}
+echo ${array[1]}
+
+for i in ${array[@]};do
+	echo $i >> $csvFile
+done
+
+exit 0

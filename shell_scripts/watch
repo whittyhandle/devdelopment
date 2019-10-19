@@ -1,0 +1,1 @@
+watch -n 1 --differences "mysql -u root -e 'show full processlist'"

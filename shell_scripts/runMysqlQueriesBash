@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+#Enter Database User
+user=""
+
+#Enter Database Password
+pass=""
+
+#Enter Database Name
+name=""
+
+/usr/local/mysql/bin/mysql -u "$user" -p"$pass" "$name" -e "delete from mobile_device_management_commands where command IN (\"DeviceInfoAccountHash\",\"DeviceInfoITunesActive\",\"ProfileList\") and apns_result_status=\"\";"

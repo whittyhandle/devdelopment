@@ -1,0 +1,1 @@
+sudo asr restore --s /Users/david.kittle/Downloads/osx_updated_170719-10.12.6-16G29.hfs.dmg --t /Volumes/Untitled  --erase

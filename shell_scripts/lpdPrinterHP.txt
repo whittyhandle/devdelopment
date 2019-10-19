@@ -1,0 +1,97 @@
+#!/bin/sh
+####################################################################################################
+#
+# ABOUT THIS PROGRAM
+#
+# NAME
+#   lpdPrinterHP.sh -- Install a HP printer via Casper
+#
+# SYNOPSIS
+#   sudo lpdPrinterHP.sh
+#
+# DESCRIPTION
+#
+####################################################################################################
+#
+# HISTORY
+#
+#   Version: 1.0
+#
+#   - Created by Steve Miller on November 08, 2016
+#
+####################################################################################################
+#
+# DEFINE VARIABLES & READ IN PARAMETERS
+#
+#####################################################################################################
+
+# Variables used for logging
+logFile="/Library/Logs/lpdPrinterHP.log"
+
+# Variables used by this script.
+prName=""
+prLocation=""
+prServer="lpd://00-print.ucsint.org"
+prPPDpath="Library/Printers/PPDs/Contents/Resources"
+prPPD=""
+HPOption1=""
+HPOption2=""
+HPOption3=""
+HPOption4=""
+HPOption5=""
+
+# CHECK TO SEE IF A VALUE WERE PASSED IN FOR PARAMETERS AND ASSIGN THEM
+if [ "$4" != "" ] && [ "$prName" == "" ]; then
+    prName="$4"
+fi
+
+if [ "$5" != "" ] && [ "$prLocation" == "" ]; then
+    prLocation="$5"
+fi
+
+if [ "$6" != "" ] && [ "$prPPD" == "" ]; then
+    prPPD="$6"
+fi
+
+if [ "$7" == "Default" ]; then
+    prSETdefault="$4"
+fi
+
+if [ "$8" != "" ] && [ "$HPOption1" == "" ]; then
+    HPOption1="$8"
+fi
+
+if [ "$9" != "" ] && [ "$HPOption2" == "" ]; then
+    HPOption2="$9"
+fi
+
+if [ "$10" != "" ] && [ "$HPOption3" == "" ]; then
+    HPOption3="$10"
+fi
+
+if [ "$11" != "" ] && [ "$HPOption4" == "" ]; then
+    HPOption4="$11"
+fi
+
+####################################################################################################
+# 
+# SCRIPT CONTENTS - DO NOT MODIFY BELOW THIS LINE
+#
+####################################################################################################
+/bin/echo "`date`: Started adding printer" >> ${logFile}
+
+
+# Adding printer
+/bin/echo "`date`: Adding printer ${prName}" >> ${logFile}
+lpadmin -p ${prName} -E -v ${prServer}/${prName} -P "/${prPPDpath}/${prPPD}" -L "${prLocation}" -o printer-is-shared=false -o "${HPOption1}" -o "${HPOption2}" -o "${HPOption3}" -o "${HPOption4}" -o "${HPOption5}" 
+#lpadmin -p "59-TS-P3" -E -v "lpd://00-print.ucsint.org/59-TS-P3" -P "/Library/Printers/PPDs/Contents/Resources/HP LaserJet 5M.gz" -o printer-is-shared=false
+
+# Setting printer options
+lpoptions -d "${prSETdefault}"
+
+
+if [ $? == 0 ]; then
+    /bin/echo "Printer $prName was added successfully." >> ${logFile}
+else
+    /bin/echo "There was an error adding $prName. Exit Code: $?" >> ${logFile}
+fi

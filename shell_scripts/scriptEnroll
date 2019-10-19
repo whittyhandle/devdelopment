@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#Define variables#
+JSSURL="ENTER JSS URL HERE" #Trailing slash required
+InvitationID="Enter InvitationID Here" 
+
+
+###Do not modify below this line###
+
+#check for jamf binary 
+checkJssBin=$(ls /usr/local/bin/ | grep jamf )
+
+
+function noBinEnroll {
+	 curl -ks $JSSURL/bin/jamf -o /tmp/jamf
+	 mkdir -p /usr/local/jamf/bin /usr/local/bin
+	 mv /tmp/jamf /usr/local/jamf/bin
+	 chmod +x /usr/local/jamf/bin/jamf
+	 ln -s /usr/local/jamf/bin/jamf /usr/local/bin
+	 jamf createConf -k -url $JSSURL
+	 jamf enroll -invitation $InvitationID
+} 
+
+function attemptRecon {
+	tryRecon=$(jamf recon)
+	[[ $tryRecon == "" ]] && echo "recon failed" ||  binReEnroll 
+	
+}
+
+function binReEnroll {
+	
+	 jamf removeframework
+	 sleep 5
+	 curl -ks $JSSURL/bin/jamf -o /tmp/jamf
+	 mkdir -p /usr/local/jamf/bin /usr/local/bin
+	 mv /tmp/jamf /usr/local/jamf/bin
+	 chmod +x /usr/local/jamf/bin/jamf
+	 ln -s /usr/local/jamf/bin/jamf /usr/local/bin
+	 jamf createConf -k -url $JSSURL
+	 jamf enroll -invitation $InvitationID
+	
+}
+
+[[ $checkJssBin == ""  ]] &&  noBinEnroll ||  attemptRecon
