@@ -1,0 +1,34 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+/**
+ * @author david.kittle
+ *
+ */
+public class RoomDimension {
+	
+	// Attributes 
+	private Integer length; 
+	private Integer width; 
+	
+
+	
+	// Default Constructor
+	
+	public RoomDimension(Integer length, Integer width) {
+		this.length = length; 
+		this.width = width;
+				
+	}
+	
+	public static Integer area(Integer length, Integer width) {
+		return length * width;
+		
+	}
+	
+
+	
+
+}

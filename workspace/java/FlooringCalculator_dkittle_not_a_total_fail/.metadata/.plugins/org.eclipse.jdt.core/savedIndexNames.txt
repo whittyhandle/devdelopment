@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+/Users/david.kittle/Development/workspace/java/FlooringCalculator_dkittle/.metadata/.plugins/org.eclipse.jdt.core
+4266120795.index
+117438316.index

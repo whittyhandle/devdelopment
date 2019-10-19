@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package edu.cvtc.edu;
+
+/**
+ * @author david.kittle
+ *
+ */
+public class FreeCheckingAccount {
+
+	/**
+	 * 
+	 */
+	public FreeCheckingAccount() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
