@@ -1,1 +1,0 @@
-openssl smime -inform DER -verify -in /path/to/downloaded.mobileconfig -noverify -out /path/to/de-signed.mobileconfig

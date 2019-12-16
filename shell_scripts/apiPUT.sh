@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -sku admin:jamf1234 https://kittle.local:8443/JSSResource/computers/id/3000 \
+curl -sku username:password https://URL:8443/JSSResource/computers/id/3000 \
 -X PUT \
 -H "content-type: text/xml" \
 -d "<computer>
