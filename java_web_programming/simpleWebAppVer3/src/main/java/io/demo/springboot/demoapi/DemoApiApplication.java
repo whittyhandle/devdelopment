@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-// anotation tell spring boot this is the starting point for the applicaton
+// annotation tell spring boot this is the starting point for the applicaton
 @SpringBootApplication
 // scans the parent
 // needed because HelloContoller is in a new packager
