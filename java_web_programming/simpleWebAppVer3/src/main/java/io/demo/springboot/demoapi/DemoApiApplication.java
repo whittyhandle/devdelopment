@@ -7,8 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 // annotation tell spring boot this is the starting point for the applicaton
 @SpringBootApplication
 // scans the parent
-// needed because HelloContoller is in a new packager
-@ComponentScan(basePackages="io.demo")
+// @ComponentScan(basePackages="io.demo") >> needed if HelloContoller is in a new package
 public class DemoApiApplication {
 
     public static void main(String[] args) {
