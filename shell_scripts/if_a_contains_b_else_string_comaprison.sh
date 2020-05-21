@@ -1,6 +1,6 @@
 #!/bin/bash
 
-account="secureschool.lawnside.nj.k12us.com"
+account=""
 result="could not be found"
 count=0 
 
