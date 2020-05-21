@@ -1,6 +1,6 @@
 #!/bin/bash
 
-account="google"
+account="secureschool.lawnside.nj.k12us.com"
 result="could not be found"
 count=0 
 
@@ -16,11 +16,17 @@ do
 			break
 		fi
 	else
-		#security delete-internet-password -a $acct
+		security delete-internet-password -a $acct
 		count=1
 
 		
 	fi
 done
+
 osascript -e 'tell app "System Events" to display notification "reboot" with title "reboot"'
+
+sleep 30
+
+shutdown -r now 
+
 exit 0
