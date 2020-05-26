@@ -16,7 +16,7 @@ public class TopicService {
             new Topic("javascript", "Javascript", "Javascript Description")
     );
 
-    public List<Topic> getAllTopic() {
+    public List<Topic> getAllTopics() {
         return topics;
     }
 }

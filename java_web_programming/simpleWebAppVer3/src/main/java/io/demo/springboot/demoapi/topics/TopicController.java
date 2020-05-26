@@ -21,6 +21,6 @@ public class TopicController {
     @RequestMapping(method = RequestMethod.GET, value = "/topics", produces = "application/json")
     public List<Topic> getAllTopics() {
 
-        return
+        return topicService.getAllTopics();
     }
 }
